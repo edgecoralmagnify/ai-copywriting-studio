@@ -1,0 +1,42 @@
+[project]
+name = "ai-copywriting-studio"
+version = "0.6.3"
+description = "Windows desktop pipeline that turns raw briefs into finished copy."
+readme = "docs/architecture.md"
+requires-python = ">=3.11"
+authors = [{ name = "Sam Okafor", email = "sam@ai-copywriting-studio.dev" }]
+license = { text = "MIT" }
+dependencies = [
+    "httpx>=0.27",
+    "pydantic>=2.7",
+    "tomli>=2.0; python_version < '3.11'",
+    "keyring>=25.0",
+    "rich>=13.7",
+    "python-docx>=1.1",
+    "tenacity>=8.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "pytest-asyncio>=0.23", "ruff>=0.4", "mypy>=1.10"]
+wordpress = ["python-wordpress-xmlrpc>=2.3"]
+
+[project.scripts]
+ai-copywriting-studio = "bootstrap.cli:main"
+acs-worker = "queue.worker:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+files = ["core", "processors", "queue"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
