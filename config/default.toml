@@ -1,0 +1,23 @@
+# Default settings for ai-copywriting-studio.
+# Copy to local.toml and edit; local.toml is gitignored.
+
+[model]
+provider = "openai"
+model = "gpt-4o-mini"
+temperature = 0.7
+max_tokens = 1024
+timeout_s = 60.0
+api_key_env = "ACS_API_KEY"
+
+[queue]
+workers = 2
+max_retries = 3
+backoff_base_s = 1.5
+state_dir = "data/jobs"
+
+[output]
+export_dir = "data/exports"
+default_drivers = ["markdown", "clipboard"]
+# wordpress_url = "https://example.com/xmlrpc.php"
+
+stages = ["outline", "draft", "tone", "seo", "factcheck"]
